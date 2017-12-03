@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.multimeet.things2do.R;
 import com.example.multimeet.things2do.adapter.TaskListAdapter;
@@ -90,6 +91,7 @@ public class Home extends AppCompatActivity
         dialog.show();
 
         add.setOnClickListener((view)->{
+            //Toast.makeText(getApplicationContext(),"hitting clck",Toast.LENGTH_SHORT).show();
             if(title.getText().toString().equals("")
                     || des.getText().toString().equals("") )
             {
@@ -103,12 +105,13 @@ public class Home extends AppCompatActivity
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(()->{
-                        dialog.dismiss();
                         Snackbar.make(snackView,"Task Added Successfully",Snackbar.LENGTH_SHORT).show();
-                    },throwable -> {
+                        dialog.dismiss();
+                },throwable -> {
                         Log.e(TAG,"Error: 34 "+throwable.getMessage());
             }));
         });
+
 
     }
     @Override
@@ -175,3 +178,4 @@ public class Home extends AppCompatActivity
         return true;
     }
 }
+
